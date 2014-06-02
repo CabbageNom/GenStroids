@@ -17,8 +17,16 @@ public class Main {
 		tempship.setPos(new Vec(200, 250));
 		tempship.setAng(1);
 		Entities.ships.add(tempship);
+		
+		Missile tempmissile = new Missile(0);
+		tempmissile.setPos(new Vec(200, 300));
+		tempmissile.setVel(new Vec(0.5, 0.5));
+		Entities.missiles.add(tempmissile);
 
-		System.out.println(Entities.ships.size());
+		tempmissile = new Missile(1);
+		tempmissile.setPos(new Vec(300, 300));
+		tempmissile.setVel(new Vec(0.2, 0));
+		Entities.missiles.add(tempmissile);
 
 		Thread mainthread = new Thread(new MainThread());
 		mainthread.start();

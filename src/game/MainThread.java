@@ -18,5 +18,8 @@ public class MainThread implements Runnable {
 			ship.think();
 			ship.move();
 		}
+		for (Missile missile : Entities.missiles) {
+			missile.move();
+		}
 	}
 }

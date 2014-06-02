@@ -24,6 +24,10 @@ public class Renderer extends JPanel {
 			ship.draw(g2);
 		}
 
+		// Draw Missiles
+		for (Missile missile: Entities.missiles) {
+			missile.draw(g2);
+		}
 		g2.setColor(new Color(50, 50, 50));
 		g2.drawRect(0, 0, 400, 400);
 	}
