@@ -7,10 +7,12 @@ public abstract class Entity {
 	private Vec pos, vel;
 	private double ang, angvel;
 	private boolean active;
+	private int uID;
 
 	public Entity() {
 		this.pos = new Vec();
 		this.vel = new Vec();
+		this.uID = Entities.getUID();
 	}
 	
 	public void setPos(double x, double y) {
@@ -84,6 +86,10 @@ public abstract class Entity {
 	}
 	public void setAngVel(double angvel) {
 		this.angvel = angvel;
+	}
+	
+	public int getUID() {
+		return this.uID;
 	}
 
 	public abstract void draw(Graphics2D g);
