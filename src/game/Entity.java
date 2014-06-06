@@ -6,11 +6,13 @@ public abstract class Entity {
 	
 	private Vec pos, vel;
 	private double ang, angvel;
-	private boolean active;
+	private boolean active, tobedeleted = false;
+	private int entID;
 
 	public Entity() {
 		this.pos = new Vec();
 		this.vel = new Vec();
+		this.entID = Entities.getUID();
 	}
 	
 	public void setPos(double x, double y) {
@@ -84,6 +86,20 @@ public abstract class Entity {
 	}
 	public void setAngVel(double angvel) {
 		this.angvel = angvel;
+	}
+
+	public int getEntID() {
+		return entID;
+	}
+	public void setEntID(int entID) {
+		this.entID = entID;
+	}
+	
+	public void delete() {
+		this.tobedeleted = true;
+	}
+	public boolean isToBeDeleted() {
+		return tobedeleted;
 	}
 
 	public abstract void draw(Graphics2D g);

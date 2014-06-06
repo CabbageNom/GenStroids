@@ -20,7 +20,7 @@ public class Main {
 		
 		Missile tempmissile = new Missile(0);
 		tempmissile.setPos(new Vec(200, 300));
-		tempmissile.setVel(new Vec(0.5, 0.5));
+		tempmissile.setVel(new Vec(0.1, 0.1));
 		Entities.missiles.add(tempmissile);
 
 		tempmissile = new Missile(1);

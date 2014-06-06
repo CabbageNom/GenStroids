@@ -101,4 +101,5 @@ public class Ship extends Entity {
 		this.setAngVel(d.turn*0.05);
 		this.setVel(new Vec(d.moveside, d.move).getRotated(this.getAng()));
 	}
+
 }

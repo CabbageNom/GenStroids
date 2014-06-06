@@ -1,5 +1,7 @@
 package game;
 
+import java.util.Iterator;
+
 public class MainThread implements Runnable {
 	
 	public void run() {
@@ -9,17 +11,31 @@ public class MainThread implements Runnable {
 				Thread.sleep(1000/60);
 			}
 		} catch (Exception e) {
-
+			e.printStackTrace();
 		}
 	}
 
+	private Iterator shipiter, missileiter;
+
 	private void tick() {
-		for (Ship ship : Entities.ships) {
-			ship.think();
-			ship.move();
+		shipiter = Entities.ships.iterator();
+		while(shipiter.hasNext()) {
+			Ship ship = (Ship) shipiter.next();
+			if (ship.isToBeDeleted()) {
+				shipiter.remove();
+			} else {
+				ship.think();
+				ship.move();
+			}
 		}
-		for (Missile missile : Entities.missiles) {
-			missile.move();
+		missileiter = Entities.missiles.iterator();
+		while(missileiter.hasNext()) {
+			Missile missile = (Missile) missileiter.next();
+			if (missile.isToBeDeleted()) {
+				missileiter.remove();
+			} else {
+				missile.move();
+			}
 		}
 	}
 }
