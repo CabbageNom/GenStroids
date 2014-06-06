@@ -6,13 +6,22 @@ public abstract class Entity {
 	
 	private Vec pos, vel;
 	private double ang, angvel;
+<<<<<<< HEAD
 	private boolean active, tobedeleted = false;
 	private int entID;
+=======
+	private boolean active;
+	private int uID;
+>>>>>>> 3ffb977225fe75ae4f087a5573adc529842a7689
 
 	public Entity() {
 		this.pos = new Vec();
 		this.vel = new Vec();
+<<<<<<< HEAD
 		this.entID = Entities.getUID();
+=======
+		this.uID = Entities.getUID();
+>>>>>>> 3ffb977225fe75ae4f087a5573adc529842a7689
 	}
 	
 	public void setPos(double x, double y) {
@@ -86,6 +95,10 @@ public abstract class Entity {
 	}
 	public void setAngVel(double angvel) {
 		this.angvel = angvel;
+	}
+	
+	public int getUID() {
+		return this.uID;
 	}
 
 	public int getEntID() {
