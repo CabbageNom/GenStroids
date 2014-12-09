@@ -4,6 +4,10 @@ import java.awt.Graphics2D;
 
 public abstract class Entity {
 	
+	/*
+	 * definitions lel
+	 */
+	
 	private Vec pos, vel;
 	private double ang, angvel;
 
@@ -15,7 +19,6 @@ public abstract class Entity {
 		this.vel = new Vec();
 
 		this.uID = Entities.getUID();
-
 	}
 	
 	public void setPos(double x, double y) {
@@ -58,20 +61,20 @@ public abstract class Entity {
 		this.bounce();
 		this.pos.x += this.vel.x;
 		this.pos.y += this.vel.y;
-		this.ang += this.angvel;
+		this.setAng(this.ang + this.angvel);
 	}
 
 	public void bounce() {
 		if (this.pos.x <= 0) {
 			this.vel.x = 1;
 		}
-		if (this.pos.x >= 400) {
+		if (this.pos.x >= Main.BOARD_SIZE_X) {
 			this.vel.x = -1;
 		}
 		if (this.pos.y <= 0) {
 			this.vel.y = 1;
 		}
-		if (this.pos.y >= 400) {
+		if (this.pos.y >= Main.BOARD_SIZE_Y) {
 			this.vel.y = -1;
 		}
 	}
@@ -80,6 +83,12 @@ public abstract class Entity {
 		double dy = ent.getPos().y - this.getPos().y;
 		double dx = ent.getPos().x - this.getPos().x;
 		return Math.atan2(dy, dx);
+	}
+	
+	public double getDist(Entity ent) {
+		double dy = ent.getPos().y - this.getPos().y;
+		double dx = ent.getPos().x - this.getPos().x;
+		return Math.sqrt(dy*dy + dx*dx);
 	}
 	
 	public double getAng() {
@@ -113,5 +122,4 @@ public abstract class Entity {
 	}
 
 	public abstract void draw(Graphics2D g);
-
 }

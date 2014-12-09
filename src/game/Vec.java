@@ -29,4 +29,8 @@ public class Vec {
 		this.x = rx;
 		this.y = ry;
 	}
+	
+	public static Vec add(Vec v1, Vec v2) {
+		return new Vec(v1.x + v2.x, v1.y + v2.y);
+	}
 }
