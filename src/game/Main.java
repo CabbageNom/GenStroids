@@ -33,10 +33,6 @@ public class Main {
 		tempship.setAng(1);
 		Entities.ships.add(tempship);
 		
-		for (Ship ship : Entities.ships) {
-			ship.wake();
-		}	
-		
 		mainThread = new MainThread();
 		Thread thread = new Thread(mainThread);
 		thread.start();

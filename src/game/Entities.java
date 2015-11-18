@@ -2,11 +2,10 @@ package game;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Entities {
-	public static List<Ship> ships = Collections.synchronizedList(new ArrayList<Ship>());
-	public static List<Missile> missiles = Collections.synchronizedList(new ArrayList<Missile>());
+	public static List<Ship> ships = new ArrayList<Ship>();
+	public static List<Missile> missiles = new ArrayList<Missile>();
 	
 	public static void nextGen() {
 		int maxFitness = 0;
@@ -36,6 +35,7 @@ public class Entities {
 				continue;
 			}
 		}
+		System.setErr(
 		
 		// Generate new child ship from top 2 scoring ships
 		Ship newShip = Ship.createChild(Entities.ships.get(maxFEntID), Entities.ships.get(maxF2EntID), minFEntID);

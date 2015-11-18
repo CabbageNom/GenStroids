@@ -13,15 +13,12 @@ public class Ship extends Entity {
 	private int generation;
 	private Color color;
 	private HashMap<Integer, Decision> decisionmap = new HashMap<Integer, Decision>();
-	private RunThread runThread;
 	private Thread thread;
 	
 	// Debug vars
 	private int curHash;
 	private double otherShipHeading;
 	
-	public boolean thought = false;
-
 	public Ship() {
 		this.setEntID(Entities.ships.size());
 		this.setColor(new Color((float) Math.random(), (float) Math.random(), (float) Math.random()));
@@ -29,12 +26,6 @@ public class Ship extends Entity {
 		this.fitnessScore = 0;
 		this.generation = 1;
 		this.decayTimer = 600;
-		runThread = new RunThread(this);
-		thread = new Thread(runThread);
-	}
-	
-	public void wake() {
-		thread.start();
 	}
 	
 	/*
@@ -71,21 +62,6 @@ public class Ship extends Entity {
 		}
 		}
 		}
-		/*for (int i = 0; i < MAX_HASH; i++) {
-			if (parent1.hasHash(i) && parent2.hasHash(i)) {
-				double rand = Math.random();
-				if (rand > 0.55)
-					child.setHash(i, parent1.getHash(i));
-				else if (rand > 0.1)
-					child.setHash(i, parent2.getHash(i));
-			} else if (parent1.hasHash(i)) {
-				if (Math.random() > 0.95)
-					child.setHash(i, parent1.getHash(i));
-			} else if (parent2.hasHash(i)) {
-				if (Math.random() > 0.95)
-					child.setHash(i, parent2.getHash(i));
-			}
-		}*/
 		
 		return child;
 	}
@@ -107,19 +83,9 @@ public class Ship extends Entity {
 		g.setColor(this.color);
 		g.fill(shipPoly);
 		
-		/*
-		for (int i = 0; i < 9; i++) {
-			int diameter = 50*i;
-			g.drawOval((int) (this.getPos().x - diameter/2),
-				   (int) (this.getPos().y - diameter/2),
-				   diameter, diameter);
-		}*/
-		//g.drawOval((int) this.getPos().x - 125, (int) this.getPos().y - 125, 250, 250);
 		g.drawString("hash: " + curHash, (int) (this.getPos().x + 10), (int) (this.getPos().y - 10));
-		//g.drawString("OtherShipHeading: " + otherShipHeading, (int) (this.getPos().x + 10), (int) (this.getPos().y -5));
 		g.drawString("fitness: " + this.fitnessScore, (int) (this.getPos().x + 10), (int) (this.getPos().y));
 		g.drawString("age: " + this.generation, (int) (this.getPos().x + 10), (int) (this.getPos().y + 10));
-		g.drawString("thought: " + this.thought, (int) (this.getPos().x + 10), (int) (this.getPos().y + 20));
 	}
 
 	public void setColor(Color color) {
@@ -351,43 +317,6 @@ public class Ship extends Entity {
 		}
 		
 	}
-	
-	private class RunThread implements Runnable {
-		
-		Ship parent;
-		
-		public RunThread(Ship parent) {
-			this.parent = parent;
-		}
-		
-		public void run () {
-			try {
-				while (true) {
-					if (!MainThread.paused)// && ControlThread.think)
-						tick();
-					if (!MainThread.slow)
-						Thread.sleep(1000/TICK_RATE);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		private void tick() {//
-			if (ControlThread.think) {
-				parent.think();
-				parent.thought = true;
-				MainThread.thought++;
-			}
-			if (ControlThread.move) {
-				parent.move();
-				parent.thought = false;
-			}
-			//parent.move();
-		}
-		
-	}
-	
 	
 	public void addGeneration() {
 		this.generation++;
